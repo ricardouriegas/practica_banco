@@ -128,6 +128,8 @@ public class App {
 
     void gestionarCuentasDebito(String rfc) throws Exception {
         int opt;
+        // limpiar pantalla
+        // System.out.println("\033[H\033[2J");
         System.out.println("========================");
         System.out.println("Usted ingreso al usuario: " + rfc);
         System.out.println("========================");
@@ -143,7 +145,8 @@ public class App {
                     registrarNuevoMovimiento(rfc);
                     break;
                 case 3: // Consultar movimiento
-
+                    System.out.println("Ingrese el RFC: ");
+                    rfc = in.nextLine();
                     break;
                 case 4: // Cancelar cuenta
 
@@ -160,6 +163,13 @@ public class App {
     void registrarNuevoMovimiento(String rfc) throws Exception{
         System.out.println("Ingresa el identificador de la cuenta: ");
         String id = in.nextLine();
+
+        Debito cuenta = ManejadorDebito.buscarCuentaEspecifica(rfc, id);
+        if(cuenta == null){
+            System.out.println("No se encontró la cuenta\n");
+            return;
+        }
+
         int opt;
         
         do {
@@ -168,10 +178,10 @@ public class App {
 
             switch (opt) {
                 case 1: // depósito
-                    ManejadorDebito.realizarDeposito(ManejadorDebito.buscarCuentaEspecifica(rfc, id));
+                    ManejadorDebito.realizarDeposito(cuenta);
                     break;
                 case 2: // retiro
-
+                    
                     break;
                 default:
                     break;

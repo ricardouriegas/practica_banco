@@ -15,7 +15,6 @@ public class ManejadorDebito {
         if(cuentas.containsKey(rfc)){
             return cuentas.get(rfc);
         } else {
-            System.out.println("No se encontraron cuentas del usuario");
             return null;
         }
     }
@@ -35,18 +34,17 @@ public class ManejadorDebito {
 
         if(!cuentas.containsKey(rfc)){
             cuentas.put(rfc, new ArrayList<Debito>());
+            cuentas.get(rfc).add(new Debito(saldo, rfc));
         } else {
             cuentas.get(rfc).add(new Debito(saldo, rfc));
             System.out.println("Cuenta agregada con éxito");
         }
+        ManejadorDebito.save();
     }
 
     /*******************************************************************/
     /***************************Cancelar Cuenta*************************/
     /*******************************************************************/
-    /**
-     * TODO: CHECAR QUE JALE ESTA FUNCION
-     */
     public static void cancelarCuenta(String rfc, String numCuenta){
         // obtener cuentas del usuario
         ArrayList<Debito> cuentasUsuario = obtenerListaCuentas(rfc);
@@ -100,8 +98,19 @@ public class ManejadorDebito {
         return true;
     }
 
+    /**
+     * Función para realizar un retiro de la cuenta
+     * 
+     * @param cuenta
+     * @throws Exception
+      */
     public static void realizarDeposito(Debito cuenta) throws Exception{
-        System.out.println("Ingresa el concepto del deposito: ");
+        if(cuenta==null){
+            System.out.println("No se encontró la cuenta");
+            return;
+        }
+        
+        System.out.println("Ingresa el concepto del depósito: ");
         String concepto = in.nextLine();
         
         System.out.println("Ingresa la cantidad a depositar: ");
@@ -116,7 +125,7 @@ public class ManejadorDebito {
         String fechaStr;
         Date fechaNacimiento;
         do {
-            System.out.println("Ingresa la fecha de la operación: ");
+            System.out.println("Ingresa la fecha de la operación (mm/dd/yyyy): ");
             fechaStr = in.nextLine();
             if(ManejadorClientes.isValidDate(fechaStr)){
                 fechaNacimiento = sdf.parse(fechaStr);
@@ -127,8 +136,11 @@ public class ManejadorDebito {
         } while (true);
         
         String tipo = "Depósito";
+        cuenta.setSaldo(cuenta.getSaldo() + cantidad);
         cuenta.agregarMovimiento(new Movimiento(concepto, cantidad, fechaNacimiento, tipo));
     }
+
+
 
     /**
      * Obtiene una cuenta con un ID en específico
@@ -158,10 +170,25 @@ public class ManejadorDebito {
         }
     }
 
+    public static void eliminarRegistro(String rfc){
+        if(cuentas.containsKey(rfc)){
+            cuentas.remove(rfc);
+        }
+    }
+
     /**
      * Función que guarda los datos realizados
       */
     public static void save(){
         FileManagement.serializarCuentasDebito(cuentas);
+    }
+
+    /*******************************************************************/
+    /***********************CONSULTA MOVIMIENTOS***********************/
+    /*******************************************************************/
+    public static void consultarMovimientos (String rfc, String identificador) {
+        Debito cuentaConMovimientos = buscarCuentaEspecifica(rfc, identificador);
+
+        // validar que la cuenta tenga movimientos
     }
 }

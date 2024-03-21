@@ -181,23 +181,43 @@ public class ManejadorClientes {
     /*******************************************************************/
     /**
      * TODO: CHECAR QUE FUNCIONE
+     * pos no funciona
      */
     public static void borrarCliente(){
         System.out.println("Ingresa el RFC del cliente a borrar: ");
         String rfc = in.nextLine().toUpperCase();
-        for(Cliente c : clientes){
-            if(c.getRfc().equals(rfc)){
-                if(ManejadorDebito.obtenerListaCuentas(c.getRfc()).size() == 0){
-                    System.out.println("Borrado éxitoso");
-                    clientes.remove(c);
-                } else {
-                    System.out.println("El cliente tiene cuentas activas");
-                }
-                
+        
+        Cliente c = buscarCliente(rfc);
+
+        if(c == null){
+            System.out.println("No se encontró el cliente");
+            return;
+        }
+        
+        ArrayList<Debito> cuentasDebito = ManejadorDebito.obtenerListaCuentas(rfc); 
+
+        if(cuentasDebito == null || cuentasDebito.isEmpty()){
+            ManejadorDebito.eliminarRegistro(rfc);
+            clientes.remove(c);
+            System.out.println("Cliente borrado éxitosamente");
+            return;
+        }
+
+        for(Debito d : cuentasDebito){
+            if(d.getSaldo() != 0){
+                System.out.println("El cliente aún tiene cuentas activas");
+                return;
             }
         }
         
-        System.out.println("Cliente no encontrado");
+        // TODO: Verificación de cuentas de crédito
+        // for (Credito credito: cuentasCredito) {
+
+        // }
+        
+        ManejadorDebito.eliminarRegistro(rfc);
+        clientes.remove(c);
+        System.out.println("Cliente borrado éxitosamente");
     }
 
     public static Cliente buscarCliente(String rfc){
