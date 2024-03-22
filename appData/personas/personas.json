@@ -1,34 +1,10 @@
 [
   {
-    "rfc": "EMU001012897",
-    "nombre": "RIC",
-    "apellidos": "EM UR",
-    "esPersonaFisica": true,
-    "email": "gm@m",
-    "fechaNacimiento": "Oct 12, 2000, 12:00:00 AM"
-  },
-  {
-    "rfc": "PED041012755",
-    "nombre": "PEDRO JOSE",
-    "apellidos": "",
-    "esPersonaFisica": false,
-    "email": "em@email",
-    "fechaNacimiento": "Oct 12, 2004, 12:00:00 AM"
-  },
-  {
-    "rfc": "SAI0310126109",
-    "nombre": "PEDRO MARIO",
-    "apellidos": "SANCHEZ IBARRA",
-    "esPersonaFisica": true,
-    "email": "pirer@gmail.com",
-    "fechaNacimiento": "Oct 12, 2003, 12:00:00 AM"
-  },
-  {
-    "rfc": "OIA001012366",
-    "nombre": "MARIA RAQUEL",
-    "apellidos": "ORTIZ ALVAREZ",
+    "rfc": "AAE041012196",
+    "nombre": "JOSHUA ",
+    "apellidos": "ARRAZOLA ELIZONDO",
     "esPersonaFisica": true,
     "email": "email@email.com",
-    "fechaNacimiento": "Oct 12, 2000, 12:00:00 AM"
+    "fechaNacimiento": "Oct 12, 2004, 12:00:00 AM"
   }
 ]

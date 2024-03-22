@@ -105,7 +105,7 @@ public class App {
         Cliente c = ManejadorClientes.buscarCliente(rfc);
 
         if(c==null){
-            System.out.println("El cliente no fue encontrado");
+            System.out.println("El cliente no fue encontrado\n\n");
             return;
         }
         
@@ -130,9 +130,9 @@ public class App {
         int opt;
         // limpiar pantalla
         // System.out.println("\033[H\033[2J");
-        System.out.println("========================");
+        System.out.println("=======================================");
         System.out.println("Usted ingreso al usuario: " + rfc);
-        System.out.println("========================");
+        System.out.println("=======================================");
         do {
             Menus.submenuGestionarDebito();
             opt = Integer.parseInt(in.nextLine());
@@ -144,12 +144,14 @@ public class App {
                 case 2: // Registrar nuevo movimiento
                     registrarNuevoMovimiento(rfc);
                     break;
-                case 3: // Consultar movimiento
-                    System.out.println("Ingrese el RFC: ");
-                    rfc = in.nextLine();
+                case 3: // Listar movimiento
+                    listarMovimientos(rfc);
                     break;
                 case 4: // Cancelar cuenta
-
+                    System.out.println("Ingresa el identificador de la cuenta: ");
+                    String identificador = in.nextLine();
+                    
+                    ManejadorDebito.eliminarCuenta(ManejadorDebito.buscarCuentaEspecifica(rfc, identificador));
                     break;
                 case 5: // Mostrar cuentas
                     ManejadorDebito.mostrarCuentasRegistradas(rfc);
@@ -171,7 +173,6 @@ public class App {
         }
 
         int opt;
-        
         do {
             Menus.subsubmenuRegistrarNuevoMovimiento();
             opt = Integer.parseInt(in.nextLine());
@@ -181,8 +182,39 @@ public class App {
                     ManejadorDebito.realizarDeposito(cuenta);
                     break;
                 case 2: // retiro
-                    
+                    ManejadorDebito.realizarRetiro(cuenta);
                     break;
+                default:
+                    break;
+            }
+        } while (opt!=0);
+    }
+
+    /**
+     * Menus para listar movimientos
+      */
+    void listarMovimientos(String rfc){
+        int opt;
+        
+        System.out.println("Ingresa el identificador de la cuenta: ");
+        String identificador = in.nextLine();
+
+        Debito cuenta = ManejadorDebito.buscarCuentaEspecifica(rfc, identificador);
+
+        if(cuenta == null){
+            System.out.println("No se encontró la cuenta a listar");
+            return;
+        }
+
+        do {
+            Menus.subsubMenuListarMovimientos();
+            opt = Integer.parseInt(in.nextLine());
+            switch (opt) {
+                case 1: // Listar por año-mes
+                    ManejadorDebito.consultarMovimientosPorAnioMes(cuenta);
+                    break;
+                case 2: // Listar en general
+                    ManejadorDebito.listarGeneral(cuenta);
                 default:
                     break;
             }

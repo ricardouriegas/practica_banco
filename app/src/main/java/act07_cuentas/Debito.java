@@ -41,6 +41,11 @@ public class Debito implements Serializable {
     public String getIdentificadorCuenta() {
         return identificadorCuenta;
     }
+
+    public ArrayList<Movimiento> getHistorial () {
+        return historial;
+    }
+
     /**
      * Métodos y funciones
       */

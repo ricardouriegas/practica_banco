@@ -106,7 +106,7 @@ public class ManejadorDebito {
       */
     public static void realizarDeposito(Debito cuenta) throws Exception{
         if(cuenta==null){
-            System.out.println("No se encontró la cuenta");
+            System.out.println("No se encontró la cuenta\n");
             return;
         }
         
@@ -140,7 +140,50 @@ public class ManejadorDebito {
         cuenta.agregarMovimiento(new Movimiento(concepto, cantidad, fechaNacimiento, tipo));
     }
 
+    /**
+     * Funcion que realiza un retiro de una cuenta
+      */
+    public static void realizarRetiro(Debito cuenta) throws Exception {
+        if(cuenta == null){
+            System.out.println("No se encontró la cuenta\n");
+            return;
+        }
 
+        System.out.println("========================================================");
+        System.out.println("Bienvenido, su saldo es de $" + cuenta.getSaldo() +"\n");
+
+        System.out.println("Ingresa el concepto del retiro: ");
+        String concepto = in.nextLine();
+        
+        System.out.println("Ingresa la cantidad a retirar: ");
+        double cantidad;
+
+        do {
+            cantidad = Double.parseDouble(in.nextLine());
+            if(cantidad > cuenta.getSaldo()){
+                System.out.println("El valor del retiro no puede ser mayor que el saldo");
+            } else if(cantidad <= 0){
+                System.out.println("Cantidad inválida");
+            } else break;
+        } while (true);
+        
+        String fechaStr;
+        Date fechaNacimiento;
+        do {
+            System.out.println("Ingresa la fecha de la operación (mm/dd/yyyy): ");
+            fechaStr = in.nextLine();
+            if(ManejadorClientes.isValidDate(fechaStr)){
+                fechaNacimiento = sdf.parse(fechaStr);
+                break;
+            } else {
+                System.out.println("Fecha inválida");
+            }
+        } while (true);
+        
+        String tipo = "Retiro";
+        cuenta.setSaldo(cuenta.getSaldo() - cantidad);
+        cuenta.agregarMovimiento(new Movimiento(concepto, cantidad, fechaNacimiento, tipo));
+    }
 
     /**
      * Obtiene una cuenta con un ID en específico
@@ -156,6 +199,27 @@ public class ManejadorDebito {
         return null;
     }
 
+    public static void eliminarCuenta(Debito cuenta){
+        if(cuenta == null){
+            System.out.println("La cuenta no fue encontrada");
+            return;
+        }
+        
+        ArrayList<Debito> cuentas = obtenerListaCuentas(cuenta.getRfc());
+
+        if(cuenta.getSaldo()!=0){
+            System.out.println("No se puede eliminar la cuenta, aún tiene saldo\n\n");
+            return;
+        }
+        
+        System.out.println("Cuenta eliminada con éxito");
+        cuentas.remove(cuenta);
+    }
+
+    /**
+     * Muestra todas las cuentas que tiene un usuario
+     * @param rfc
+      */
     public static void mostrarCuentasRegistradas(String rfc){
         ArrayList<Debito> arr = obtenerListaCuentas(rfc);
 
@@ -170,6 +234,11 @@ public class ManejadorDebito {
         }
     }
 
+    /**
+     * Función que elimina un registro del hashmap
+     * con todos los datos que contiene
+     * @param rfc
+      */
     public static void eliminarRegistro(String rfc){
         if(cuentas.containsKey(rfc)){
             cuentas.remove(rfc);
@@ -186,9 +255,65 @@ public class ManejadorDebito {
     /*******************************************************************/
     /***********************CONSULTA MOVIMIENTOS***********************/
     /*******************************************************************/
-    public static void consultarMovimientos (String rfc, String identificador) {
-        Debito cuentaConMovimientos = buscarCuentaEspecifica(rfc, identificador);
+    public static void consultarMovimientosPorAnioMes (Debito cuentaConMovimientos) {
+
+        if (cuentaConMovimientos == null) {
+            System.out.println("No se encontró la cuenta");
+            return;
+        }
 
         // validar que la cuenta tenga movimientos
+        ArrayList<Movimiento> movimientos = cuentaConMovimientos.getHistorial();
+        if (movimientos == null||movimientos.isEmpty()) {
+            System.out.println("La cuenta no tiene movimientos\n\n");
+            return;
+        }
+
+        // Para esta funcionalidad se debe especificar el año y el mes de los
+        // movimientos que se quieren consultar de una cuenta en específico.
+        // Mostrar todos los detalles del movimiento en orden cronológico
+        System.out.println("Ingresa el año para listar: ");
+        int year = Integer.parseInt(in.nextLine());
+        System.out.println("Ingresa el mes para listar: ");
+        int month = Integer.parseInt(in.nextLine()) - 1;
+
+        Collections.sort(movimientos, new Comparator<Movimiento>() {
+            @Override
+            public int compare(Movimiento o1, Movimiento o2) {
+                return o1.getFecha().compareTo(o2.getFecha());
+            }
+        });
+
+        // imprimir los movimientos
+        for (Movimiento m : movimientos) {
+            if (m.getYear() == year && m.getMonth() == month) {
+                System.out.println(m.toString());
+            }
+        }
+    }  
+
+    /**
+     * Se lista de manera general todos los movimientos
+     * @param cuenta
+      */
+    public static void listarGeneral(Debito cuenta){
+        ArrayList<Movimiento> movimientos = cuenta.getHistorial();
+
+        if(movimientos == null||movimientos.isEmpty()){
+            System.out.println("No hay movimientos registrados\n\n");
+            return;
+        }
+
+        Collections.sort(movimientos, new Comparator<Movimiento>() {
+            @Override
+            public int compare(Movimiento o1, Movimiento o2) {
+                return o1.getFecha().compareTo(o2.getFecha());
+            }
+        });
+
+        for(Movimiento m : movimientos){
+            System.out.println(m.toString());
+        }
+        
     }
 }

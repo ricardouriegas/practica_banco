@@ -47,7 +47,7 @@ public class Menus {
         System.out.println("¿Qué deseas hacer?");
         System.out.println("1) Crear una nueva cuenta de débito");
         System.out.println("2) Registrar nuevo movimiento");
-        System.out.println("3) Consultar movimiento");
+        System.out.println("3) Consultar movimientos");
         System.out.println("4) Cancelar cuenta");
         System.out.println("5) Mostrar cuentas");
         System.out.println("0) Salir");
@@ -57,6 +57,13 @@ public class Menus {
         System.out.println("¿Qué movimiento desea hacer?");
         System.out.println("1) Depósito");
         System.out.println("2) Retiro");
+        System.out.println("0) Salir");
+    }
+
+    public static void subsubMenuListarMovimientos(){
+        System.out.println("¿Cómo deseas listar?");
+        System.out.println("1) Por año-mes");
+        System.out.println("2) Listar todos");
         System.out.println("0) Salir");
     }
 }

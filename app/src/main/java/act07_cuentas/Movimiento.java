@@ -48,6 +48,10 @@ public class Movimiento implements Serializable {
         this.monto = monto;
     }
 
+    public Date getFecha() {
+        return this.fecha;
+    }
+
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
@@ -63,24 +67,56 @@ public class Movimiento implements Serializable {
      * Obtener fecha
       */
     public int getDay(){
-        return calendar.get((Calendar.MONTH)+1);
+        return calendar.get(Calendar.DAY_OF_MONTH);
     }
 
     public int getMonth(){
-        return calendar.get(Calendar.DAY_OF_MONTH);
+        return calendar.get(Calendar.MONTH);
     }
 
     public int getYear(){
         return calendar.get(Calendar.YEAR);
     }
     
+    private String obtenerMes(){
+        switch (getMonth()) {
+            case 0:
+                return "Jan";
+            case 1:
+                return "Feb";
+            case 2:
+                return "Mar";
+            case 3:
+                return "Apr";
+            case 4: 
+                return "May";
+            case 5:
+                return "Jun";
+            case 6:
+                return "Jul";
+            case 7: 
+                return "Aug";
+            case 8:
+                return "Sep";
+            case 9:
+                return "Oct";
+            case 10:
+                return "Nov";
+            case 11:
+                return "Dec";
+            default:
+                return "";
+        }
+    }
+
+    // perdoname Dios por lo que voy a hacer en esta función 😔
     @Override
     public String toString() {
         return "Movimiento {" + 
             "\n\tConcepto: '" + getConcepto() + "'" +
-            "\n\tMonto: " + getMonto() +
-            "\n\tFecha: " + getDay() + "-" + getMonth() + "-" + getYear() +
-            "\n\tTipo: " + getTipo() + 
+            "\n\tMonto: $" + getMonto() +
+            "\n\tFecha: " + obtenerMes() + "-" + getDay() + "-" + getYear() +
+            "\n\tTipo: " + getTipo() +
         "\n}";
     }
 }

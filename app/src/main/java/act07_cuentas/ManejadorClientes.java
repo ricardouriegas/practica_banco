@@ -179,10 +179,6 @@ public class ManejadorClientes {
     /*******************************************************************/
     /*****************************BORRAR********************************/
     /*******************************************************************/
-    /**
-     * TODO: CHECAR QUE FUNCIONE
-     * pos no funciona
-     */
     public static void borrarCliente(){
         System.out.println("Ingresa el RFC del cliente a borrar: ");
         String rfc = in.nextLine().toUpperCase();
@@ -196,28 +192,13 @@ public class ManejadorClientes {
         
         ArrayList<Debito> cuentasDebito = ManejadorDebito.obtenerListaCuentas(rfc); 
 
-        if(cuentasDebito == null || cuentasDebito.isEmpty()){
+        if(cuentasDebito.isEmpty()){
             ManejadorDebito.eliminarRegistro(rfc);
             clientes.remove(c);
-            System.out.println("Cliente borrado éxitosamente");
+            System.out.println("Cliente borrado éxitosamente\n\n");
             return;
-        }
-
-        for(Debito d : cuentasDebito){
-            if(d.getSaldo() != 0){
-                System.out.println("El cliente aún tiene cuentas activas");
-                return;
-            }
-        }
-        
-        // TODO: Verificación de cuentas de crédito
-        // for (Credito credito: cuentasCredito) {
-
-        // }
-        
-        ManejadorDebito.eliminarRegistro(rfc);
-        clientes.remove(c);
-        System.out.println("Cliente borrado éxitosamente");
+        } 
+        System.out.println("El cliente aún tiene cuentas activas\n\n");
     }
 
     public static Cliente buscarCliente(String rfc){
@@ -319,9 +300,7 @@ public class ManejadorClientes {
 
         do {
             Menus.menuModificaciones();
-            opc = in.nextInt();
-            // limpiar el buffer
-            in.nextLine();
+            opc = Integer.parseInt(in.nextLine());
             switch (opc) {
                 case 1:
                     System.out.println("Ingresa el nuevo nombre: ");
