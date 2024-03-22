@@ -109,7 +109,6 @@ public class Movimiento implements Serializable {
         }
     }
 
-    // perdoname Dios por lo que voy a hacer en esta función 😔
     @Override
     public String toString() {
         return "Movimiento {" + 
