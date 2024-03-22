@@ -1,10 +1,10 @@
-<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><help_text>Space for diagram no</help_text><element><id>UMLClass</id><coordinates><x>714</x><y>99</y><w>189</w><h>99</h></coordinates><panel_attributes>_Main_
+<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><help_text>Space for diagram no</help_text><element><id>UMLClass</id><coordinates><x>360</x><y>0</y><w>189</w><h>99</h></coordinates><panel_attributes>_Main_
 --
 - ManejadorClientes mc
 --
 + run()
 + gestionarClientes()
-+ listarClientes()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1083</x><y>486</y><w>189</w><h>144</h></coordinates><panel_attributes>_Cliente_
++ listarClientes()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>729</x><y>387</y><w>189</w><h>144</h></coordinates><panel_attributes>_Cliente_
 --
   - String: rfc
   - String: Nombre
@@ -13,20 +13,20 @@
   - String: Email
   - Date: FechaNacimiento
 --
-+ toString()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>354</x><y>99</y><w>189</w><h>117</h></coordinates><panel_attributes>_Menus_
++ toString()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>0</y><w>189</w><h>117</h></coordinates><panel_attributes>_Menus_
 --
 + menuPrincipal()
 + submenuGestionarClientes()
 + submenuListarClientes()
 + menuModificaciones()
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>702</y><w>297</w><h>108</h></coordinates><panel_attributes>_FileManagement_
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>306</x><y>603</y><w>297</w><h>108</h></coordinates><panel_attributes>_FileManagement_
 --
 - appPath: String
 - personasFilePath: String
 --
 + verificacionInicial()
 + serializarClientes(ArrayList&lt;Cliente&gt; c)
-+ deserializarClientes(): ArrayList&lt;Cliente&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>378</y><w>441</w><h>261</h></coordinates><panel_attributes>_ManejadorClientes_
++ deserializarClientes(): ArrayList&lt;Cliente&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>216</x><y>279</y><w>441</w><h>261</h></coordinates><panel_attributes>_ManejadorClientes_
 --
 - ArrayList&lt;Cliente&gt; clientes
 --
@@ -46,4 +46,4 @@
 + modificarCliente()
 + save()
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>534</x><y>144</y><w>198</w><h>36</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;200;20</additional_attributes></element><element><id>Relation</id><coordinates><x>777</x><y>189</y><w>27</w><h>207</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;210;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>795</x><y>630</y><w>27</w><h>90</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1002</x><y>531</y><w>99</w><h>36</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;90;20</additional_attributes></element><element><id>UMLActor</id><coordinates><x>1443</x><y>441</y><w>54</w><h>99</h></coordinates><panel_attributes>Actor</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1488</x><y>198</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1650</x><y>333</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1659</x><y>225</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1506</x><y>675</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1632</x><y>765</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1650</x><y>639</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>45</y><w>198</w><h>36</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;200;20</additional_attributes></element><element><id>Relation</id><coordinates><x>423</x><y>90</y><w>27</w><h>207</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;210;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>441</x><y>531</y><w>27</w><h>90</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>648</x><y>432</y><w>99</w><h>36</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;90;20</additional_attributes></element><element><id>UMLActor</id><coordinates><x>1089</x><y>342</y><w>54</w><h>99</h></coordinates><panel_attributes>Actor</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1134</x><y>99</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1296</x><y>234</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1305</x><y>126</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1152</x><y>576</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1278</x><y>666</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1296</x><y>540</y><w>108</w><h>36</h></coordinates><panel_attributes>Use case 1</panel_attributes><additional_attributes></additional_attributes></element></diagram>
